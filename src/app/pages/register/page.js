@@ -150,7 +150,7 @@ const Register = () => {
               <p>
                 Already have an account?{' '}
                 <Link href="/login" className="text-indigo-600 hover:text-indigo-500">
-                  Sign in
+                  Sign Up
                 </Link>
               </p>
             </div>
