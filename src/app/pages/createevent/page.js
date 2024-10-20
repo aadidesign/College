@@ -75,8 +75,7 @@ export default function CreateEventPage() {
               Create an Event
             </h1>
             <p className="text-2xl mb-8">
-              Organize and manage your event for PCCOE with our advanced features
-              and enhanced UI/UX.
+              Organize and manage your event for PCCOE with our advanced features.
             </p>
             <Link
               href="#form-section"
