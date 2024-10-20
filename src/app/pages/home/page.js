@@ -1,6 +1,6 @@
 // pages/index.js
 import React from 'react';
-import Navbar from '../../../../../components/navbar';
+import Navbar from 'root/components/navbar';
 import Sidebar from 'root/components/home/sidebar';
 import Hero from 'root/components/home/hero';
 
