@@ -73,8 +73,46 @@ export default function CreateEventPage() {
                 <input type="date" id="event-date" required />
               </div>
               <div className="form-group">
-                <label htmlFor="event-description">Event Description</label>
-                <textarea id="event-description" placeholder="Describe your event" required></textarea>
+                <label htmlFor="event-start-time">Event Start Time</label>
+                <input type="time" id="event-start-time" required />
+              </div>
+              <div className="form-group">
+                <label htmlFor="event-end-time">Event End Time</label>
+                <input type="time" id="event-end-time" required />
+              </div>
+              <div className="form-group">
+                <label htmlFor="event-venue">Event Venue</label>
+                <input type="text" id="event-venue" placeholder="Enter event venue" required />
+              </div>
+              <div className="form-group">
+                <label htmlFor="event-type">Event Type</label>
+                <select id="event-type" required>
+                  <option value="Workshop">Workshop</option>
+                  <option value="Seminar">Seminar</option>
+                  <option value="Competition">Competition</option>
+                  <option value="Webinar">Webinar</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              <div className="form-group">
+                <label htmlFor="participants-number">Number of Participants</label>
+                <input type="number" id="participants-number" placeholder="Enter number of participants" required />
+              </div>
+              <div className="form-group">
+                <label htmlFor="coordinator-name">Event Coordinator Name</label>
+                <input type="text" id="coordinator-name" placeholder="Enter coordinator name" required />
+              </div>
+              <div className="form-group">
+                <label htmlFor="coordinator-contact">Event Coordinator Contact</label>
+                <input type="text" id="coordinator-contact" placeholder="Enter coordinator contact details" required />
+              </div>
+              <div className="form-group">
+                <label htmlFor="registration-link">Event Registration Link</label>
+                <input type="url" id="registration-link" placeholder="Enter registration link (if any)" />
+              </div>
+              <div className="form-group">
+                <label htmlFor="event-banner">Upload Event Banner</label>
+                <input type="file" id="event-banner" />
               </div>
               <button type="submit" className="btn-primary">Create Event</button>
             </form>
