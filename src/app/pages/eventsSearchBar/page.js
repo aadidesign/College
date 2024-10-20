@@ -1,6 +1,7 @@
 "use client";  // This is crucial to mark this as a Client Component
 
 import { useState } from 'react';
+import Image from 'next/image';
 
 const EventsSearchBar = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -10,7 +11,7 @@ const EventsSearchBar = () => {
     shop: false,
     education: false,
   });
-  
+
   const [visibleEvents, setVisibleEvents] = useState(6); // State to manage visible events
 
   // Example events data with more events added for testing "Load More"
@@ -84,7 +85,7 @@ const EventsSearchBar = () => {
         {/* Main Content - Event Cards */}
         <div className="w-3/4 p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {events
-            .filter((event) =>
+            .filter((event) => 
               event.title.toLowerCase().includes(searchQuery.toLowerCase())
             )
             .slice(0, visibleEvents) // Show only visible events
@@ -93,7 +94,13 @@ const EventsSearchBar = () => {
                 key={event.id}
                 className="bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
               >
-                <img src={event.image} alt={event.title} className="w-full h-40 object-cover" />
+                <Image
+                  src={event.image}
+                  alt={event.title}
+                  width={400} // Set the desired width
+                  height={160} // Set the desired height
+                  className="w-full h-40 object-cover"
+                />
                 <div className="p-4">
                   <h2 className="text-lg font-bold text-blue-700">{event.title}</h2>
                   <p className="text-blue-600">Location: {event.location}</p>

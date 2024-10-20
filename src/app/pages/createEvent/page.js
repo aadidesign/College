@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Head from "next/head";
+import Image from "next/image";
 
 const PCCOE_LOGO_URL = "/path/to/pccoe-logo.png"; // Update the logo path
 
@@ -42,10 +43,12 @@ export default function CreateEventPage() {
         <div className="container mx-auto flex justify-between items-center">
           <div className="logo">
             <Link href="/">
-              <img
+              <Image
                 src={PCCOE_LOGO_URL}
                 alt="PCCOE Logo"
-                className="w-12 h-12 hover:scale-105 transition-transform"
+                width={48} // Set the width of the logo
+                height={48} // Set the height of the logo
+                className="hover:scale-105 transition-transform"
               />
             </Link>
           </div>
@@ -267,12 +270,14 @@ export default function CreateEventPage() {
                   type="file"
                   id="event-banner"
                   className="border border-gray-300 rounded-md p-4 focus:ring-2 focus:ring-blue-600"
+                  accept="image/*"
+                  required
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full bg-blue-900 text-white py-4 rounded-md font-semibold hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-2xl"
+                className="w-full bg-blue-600 text-white font-bold py-4 rounded-md hover:bg-blue-700 transition-colors"
               >
                 Create Event
               </button>
@@ -281,12 +286,10 @@ export default function CreateEventPage() {
         </section>
       </main>
 
-      <footer className="bg-blue-900 py-8 text-white">
-        <div className="container mx-auto text-center">
-          <p className="text-lg font-semibold">
-            &copy; 2024 PCCOE Event Management. All rights reserved.
-          </p>
-        </div>
+      <footer className="bg-blue-900 text-white py-4 text-center">
+        <p className="text-sm">
+          © {new Date().getFullYear()} PCCOE Event Management. All rights reserved.
+        </p>
       </footer>
     </>
   );

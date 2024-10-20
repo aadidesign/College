@@ -158,8 +158,8 @@ const Register = () => {
             <p className="text-gray-500">or sign up with</p>
             <button className="mt-4 bg-white text-gray-700 border border-gray-300 py-2 px-4 rounded-md hover:bg-gray-100">
               <img
-                src="app/images/google-logo-history-png-2598.png" // Use your Google icon image path
-                alt="Google"
+                src="/app/images/google-logo-history-png-2598.png" // Use your Google icon image path
+                alt="Google Sign-In"
                 className="inline-block w-5 mr-2"
               />
               Google
