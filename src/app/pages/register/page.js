@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 
 const Register = () => {
   return (
@@ -18,7 +19,9 @@ const Register = () => {
             alt="Logo"
             className="w-10 h-10"
           />
-          <h1 className="text-white text-2xl font-bold">Pimpri Chinchwad College of Engineering Pune</h1>
+          <h1 className="text-white text-2xl font-bold">
+            Pimpri Chinchwad College of Engineering Pune
+          </h1>
         </div>
       </div>
 
@@ -146,9 +149,9 @@ const Register = () => {
             <div className="text-center mt-6">
               <p>
                 Already have an account?{' '}
-                <a href="/login" className="text-indigo-600 hover:text-indigo-500">
+                <Link href="/login" className="text-indigo-600 hover:text-indigo-500">
                   Sign in
-                </a>
+                </Link>
               </p>
             </div>
           </form>
