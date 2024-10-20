@@ -11,11 +11,11 @@ export default function EventPage() {
   const toggleModal = () => setOpenModal(!openModal);
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gradient-to-r from-blue-50 to-blue-100">
       {/* Main Content */}
       <main className="container mx-auto px-4 py-8">
         {/* Event Section */}
-        <section className="md:flex md:justify-between">
+        <section className="md:flex md:justify-between mb-8 rounded-lg shadow-lg overflow-hidden bg-white">
           {/* Left Section */}
           <div className="md:w-2/3">
             {/* Event Image */}
@@ -25,36 +25,36 @@ export default function EventPage() {
                 alt="Event Image"
                 layout="fill"
                 objectFit="cover"
-                className="rounded-lg shadow-lg transition-transform duration-500 hover:scale-105"
+                className="rounded-lg transition-transform duration-500 hover:scale-105"
               />
             </div>
             {/* Event Details */}
-            <div className="mt-4">
-              <h2 className="text-2xl font-bold text-gray-800">
-                Dream world wide in Jakarta
+            <div className="p-6">
+              <h2 className="text-3xl font-bold text-gray-800">
+                Dream World Wide in Jakarta
               </h2>
-              <p className="text-gray-500">III Sonepat</p>
+              <p className="text-gray-500 text-lg">III Sonepat</p>
               <p className="mt-2 text-gray-600">
                 DesignHub organized a 3D Modeling Workshop using Blender on February 16 at 5 PM.
               </p>
-              <a href="#" className="text-purple-600 font-semibold mt-4 block">
+              <a href="#" className="text-purple-600 font-semibold mt-4 block hover:underline">
                 View map
               </a>
             </div>
           </div>
 
           {/* Right Section */}
-          <div className="md:w-1/3 md:ml-8 mt-8 md:mt-0 bg-white p-6 rounded-lg shadow-lg">
+          <div className="md:w-1/3 md:ml-8 mt-8 md:mt-0 p-6 bg-white rounded-lg shadow-lg">
             {/* Date and Time */}
-            <h3 className="text-xl font-bold text-gray-800">Date & time</h3>
-            <p className="mt-2 text-gray-600">Saturday, March 18 2023, 9:30PM</p>
+            <h3 className="text-2xl font-bold text-gray-800">Date & Time</h3>
+            <p className="mt-2 text-gray-600">Saturday, March 18, 2023, 9:30 PM</p>
 
             {/* Action Buttons */}
             <button 
               className="mt-4 w-full bg-purple-600 text-white py-2 px-4 rounded-md transition duration-300 hover:bg-purple-700"
               onClick={toggleModal}
             >
-              Book now
+              Book Now
             </button>
 
             <Modal open={openModal} onClose={toggleModal}>
@@ -71,15 +71,15 @@ export default function EventPage() {
             </Modal>
 
             <button className="mt-2 w-full bg-gray-300 py-2 px-4 rounded-md transition duration-300 hover:bg-gray-400">
-              Program promoter
+              Program Promoter
             </button>
             <p className="mt-4 text-gray-500 text-sm">No Refunds</p>
           </div>
         </section>
 
         {/* Description Section */}
-        <section className="mt-8">
-          <h3 className="text-xl font-bold text-gray-800">Description</h3>
+        <section className="bg-white p-6 rounded-lg shadow-lg mb-8">
+          <h3 className="text-2xl font-bold text-gray-800">Description</h3>
           <p className="mt-2 text-gray-600">
             DesignHub organized a 3D Modeling Workshop using Blender on February 16 at 5 PM. 
             The workshop taught participants the magic of creating stunning 3D models and animations 
@@ -88,8 +88,8 @@ export default function EventPage() {
         </section>
 
         {/* Event Location Section with Interactive Map */}
-        <section className="mt-8">
-          <h3 className="text-xl font-bold text-gray-800">Event location</h3>
+        <section className="bg-white p-6 rounded-lg shadow-lg mb-8">
+          <h3 className="text-2xl font-bold text-gray-800">Event Location</h3>
           <div className="w-full h-64 sm:h-96 mt-4">
             <GoogleMapReact
               bootstrapURLKeys={{ key: 'YOUR_GOOGLE_MAPS_API_KEY' }}
@@ -104,8 +104,8 @@ export default function EventPage() {
         </section>
 
         {/* Tags Section */}
-        <section className="mt-8">
-          <h3 className="text-xl font-bold text-gray-800">Tags</h3>
+        <section className="bg-white p-6 rounded-lg shadow-lg mb-8">
+          <h3 className="text-2xl font-bold text-gray-800">Tags</h3>
           <div className="flex flex-wrap mt-2">
             {['Indonesia event', 'Jaskaran event', 'UI', 'Seminar'].map((tag, i) => (
               <Tooltip title={`More about ${tag}`} key={i}>
@@ -118,8 +118,8 @@ export default function EventPage() {
         </section>
 
         {/* Other Events Section */}
-        <section className="mt-12">
-          <h2 className="text-2xl font-bold text-gray-800">Other events you may like</h2>
+        <section className="bg-white p-6 rounded-lg shadow-lg">
+          <h2 className="text-2xl font-bold text-gray-800">Other Events You May Like</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
             {[...Array(6)].map((_, i) => (
               <div key={i} className="bg-white shadow-lg rounded-lg overflow-hidden transition-transform duration-300 hover:scale-105">
@@ -133,10 +133,10 @@ export default function EventPage() {
                 </div>
                 <div className="p-4">
                   <h3 className="font-bold text-lg text-black">
-                    BestSeller Book Bootcamp - write, Market & Publish Your Book
+                    BestSeller Book Bootcamp - Write, Market & Publish Your Book
                   </h3>
                   <p className="text-sm text-gray-600">
-                    Saturday, March 18, 9:30PM
+                    Saturday, March 18, 9:30 PM
                   </p>
                   <p className="text-sm text-gray-500">ONLINE EVENT - Attend anywhere</p>
                 </div>
