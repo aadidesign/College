@@ -15,18 +15,38 @@ export default function SelfRegistration() {
     role: "",
     attendance: false,
     specialRequirements: "",
-    paymentStatus: false,
     fees: 0,
     paymentMethod: "", // To hold the selected payment method
   });
+
+  // State for the receipt
+  const [receipt, setReceipt] = useState(null);
 
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Generate receipt data
+    const receiptData = {
+      name: `${formData.firstName} ${formData.lastName}`,
+      studentId: formData.studentId,
+      email: formData.email,
+      branch: formData.branch,
+      yearOfStudy: formData.yearOfStudy,
+      isPCCOE: formData.isPCCOE,
+      fees: formData.fees,
+      role: formData.role,
+      specialRequirements: formData.specialRequirements,
+      paymentMethod: formData.paymentMethod,
+      attendance: formData.attendance,
+    };
+
+    // Set the receipt state
+    setReceipt(receiptData);
+
     if (formData.isPCCOE || formData.fees === 0) {
       // Send receipt if PCCOE student or fees are zero
-      await sendReceiptEmail();
+      await sendReceiptEmail(receiptData);
       alert("Form submitted successfully! Receipt sent to your email.");
     } else {
       // Redirect to payment page if not PCCOE student and fees apply
@@ -52,9 +72,9 @@ export default function SelfRegistration() {
   };
 
   // Function to send an automatic receipt email (mocked for now)
-  const sendReceiptEmail = async () => {
+  const sendReceiptEmail = async (receiptData) => {
     // Mocked email sending function (replace with actual email API integration)
-    console.log("Sending receipt email to", formData.email);
+    console.log("Sending receipt email to", receiptData.email);
     // You can use email APIs like SendGrid, Mailgun, or nodemailer in a real scenario.
   };
 
@@ -219,6 +239,40 @@ export default function SelfRegistration() {
                 </div>
               )}
 
+              {/* Event Selection */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700">Event</label>
+                <select
+                  name="event"
+                  value={formData.event}
+                  onChange={handleChange}
+                  className="mt-1 p-2 block w-full border-gray-300 rounded-md shadow-sm"
+                  required
+                >
+                  <option value="">Select an event</option>
+                  <option value="Tech Fest">Tech Fest</option>
+                  <option value="Cultural Fest">Cultural Fest</option>
+                  <option value="Sports Day">Sports Day</option>
+                </select>
+              </div>
+
+              {/* Role in Event */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700">Role in Event</label>
+                <select
+                  name="role"
+                  value={formData.role}
+                  onChange={handleChange}
+                  className="mt-1 p-2 block w-full border-gray-300 rounded-md shadow-sm"
+                  required
+                >
+                  <option value="">Select your role</option>
+                  <option value="Participant">Participant</option>
+                  <option value="Volunteer">Volunteer</option>
+                  <option value="Organizer">Organizer</option>
+                </select>
+              </div>
+
               {/* Special Requirements */}
               <div>
                 <label className="block text-sm font-medium text-gray-700">Special Requirements</label>
@@ -227,7 +281,7 @@ export default function SelfRegistration() {
                   value={formData.specialRequirements}
                   onChange={handleChange}
                   className="mt-1 p-2 block w-full border-gray-300 rounded-md shadow-sm"
-                  placeholder="Enter any special requirements"
+                  placeholder="Any special requirements?"
                 />
               </div>
 
@@ -243,23 +297,6 @@ export default function SelfRegistration() {
                 <label className="ml-2 block text-sm text-gray-900">
                   Mark attendance
                 </label>
-              </div>
-
-              {/* Event Role */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Role in Event</label>
-                <select
-                  name="role"
-                  value={formData.role}
-                  onChange={handleChange}
-                  className="mt-1 p-2 block w-full border-gray-300 rounded-md shadow-sm"
-                  required
-                >
-                  <option value="">Select your role</option>
-                  <option value="Participant">Participant</option>
-                  <option value="Volunteer">Volunteer</option>
-                  <option value="Organizer">Organizer</option>
-                </select>
               </div>
 
               {/* Payment Method Selection */}
@@ -282,19 +319,6 @@ export default function SelfRegistration() {
                 </div>
               )}
 
-
-            {/* Payment Button for non-PCCOE students */}
-            {!formData.isPCCOE && (
-                <button
-                  type="button"
-                  onClick={() => window.location.href = `/payment?amount=${formData.fees}&method=${formData.paymentMethod}`}
-                  className="w-full bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 transition duration-300 mt-4"
-                >
-                  Pay Fees
-                </button>
-              )}
-
-              
               {/* Submit Button */}
               <button
                 type="submit"
@@ -303,8 +327,36 @@ export default function SelfRegistration() {
                 Submit
               </button>
 
-              
+              {/* Payment Button for non-PCCOE students */}
+              {!formData.isPCCOE && (
+                <button
+                  type="button"
+                  onClick={() => window.location.href = `/payment?amount=${formData.fees}&method=${formData.paymentMethod}`}
+                  className="w-full bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 transition duration-300 mt-4"
+                >
+                  Pay Fees
+                </button>
+              )}
             </form>
+
+            {/* Display Receipt if available */}
+{receipt && (
+  <div className="mt-8 p-4 border border-gray-300 rounded-md bg-gray-100">
+    <h3 className="text-lg font-bold">Receipt</h3>
+    <p className="text-green-600 font-semibold">Your seat has been confirmed!</p>
+    <p><strong>Name:</strong> {receipt.name}</p>
+    <p><strong>Student ID:</strong> {receipt.studentId}</p>
+    <p><strong>Email:</strong> {receipt.email}</p>
+    <p><strong>Branch:</strong> {receipt.branch}</p>
+    <p><strong>Year of Study:</strong> {receipt.yearOfStudy}</p>
+    <p><strong>Role:</strong> {receipt.role}</p>
+    <p><strong>Special Requirements:</strong> {receipt.specialRequirements || 'None'}</p>
+    <p><strong>Attendance Marked:</strong> {receipt.attendance ? 'Yes' : 'No'}</p>
+    <p><strong>Fees:</strong> ₹{receipt.fees}</p>
+    <p><strong>Payment Method:</strong> {receipt.paymentMethod || 'N/A'}</p>
+  </div>
+)}
+
           </div>
         </div>
       </section>
