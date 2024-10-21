@@ -1,6 +1,6 @@
-// pages/AttendanceTake.js
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import jsPDF from 'jspdf';
 
 export default function AttendanceTake() {
   const router = useRouter();
@@ -18,15 +18,43 @@ export default function AttendanceTake() {
   // Function to toggle attendance status
   const toggleAttendance = (index) => {
     const updatedStudents = [...students];
-    updatedStudents[index].status = updatedStudents[index].status === 'Absent' ? 'Present' : 'Absent';
+    updatedStudents[index].status =
+      updatedStudents[index].status === 'Absent' ? 'Present' : 'Absent';
     setStudents(updatedStudents);
   };
 
-  // Function to handle the submission of attendance
+  // Function to generate PDF report
+  const generatePDF = () => {
+    const doc = new jsPDF();
+    doc.setFontSize(16);
+    doc.text('Attendance Report', 10, 10);
+
+    doc.setFontSize(12);
+    doc.text(`Class: ${title}`, 10, 20);
+    doc.text(`Date: ${date}`, 10, 30);
+    doc.text(`Batch: ${batch}`, 10, 40);
+
+    // Create table headers
+    doc.text('PRN', 10, 50);
+    doc.text('Name', 50, 50);
+    doc.text('Attendance Status', 150, 50);
+
+    // Loop through students and add their details to the PDF
+    students.forEach((student, index) => {
+      const yPos = 60 + index * 10;
+      doc.text(student.prn, 10, yPos);
+      doc.text(student.name, 50, yPos);
+      doc.text(student.status, 150, yPos);
+    });
+
+    // Save the PDF
+    doc.save('attendance-report.pdf');
+  };
+
+  // Function to handle attendance submission
   const handleSubmit = () => {
-    // Logic for handling attendance submission (e.g., save to a database or generate PDF)
-    // Redirect back to the main page once done
-    router.push('/');
+    generatePDF(); // Generate PDF before navigating
+    router.push('/'); // Redirect to the main page
   };
 
   return (
