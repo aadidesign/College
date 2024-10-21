@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const eventSchema = new mongoose.Schema({
     title: { type: String, required: true },
     description: { type: String },
+    banner_url: { type: String },
     date: { type: Date, required: true },
     time: { type: Date, required: true },
     venue_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Venue', required: true },
