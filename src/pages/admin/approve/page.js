@@ -1,6 +1,6 @@
 import React from 'react'
-import Navbar from 'root/components/navbar'
-import Sidebar from 'root/components/home/sidebar'
+import Navbar from '../../../components/navbar'
+import Sidebar from '../../../components/home/sidebar'
 import DocumentFormat from './letter'
 
 const page = () => {

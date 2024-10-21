@@ -1,5 +1,5 @@
 import React from 'react'
-import FullCalendar from 'root/components/calender/calender'
+import FullCalendar from '../components/calender/calender'
 
 const page = () => {
   return (

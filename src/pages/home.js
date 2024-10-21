@@ -1,8 +1,8 @@
 // pages/index.js
 import React from 'react';
-import Navbar from 'root/components/navbar';
-import Sidebar from 'root/components/home/sidebar';
-import Hero from 'root/components/home/hero';
+import Navbar from '../components/navbar';
+import Sidebar from '../components/home/sidebar';
+import Hero from '../components/home/hero';
 
 const HomePage = () => {
   return (
