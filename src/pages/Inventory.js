@@ -6,25 +6,21 @@ export default function Inventory() {
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [updateProduct, setUpdateProduct] = useState([]);
   const [products, setAllProducts] = useState([
-    // Example products, you can update these with real ones later
     { _id: 1, name: "Product A", manufacturer: "Brand X", stock: 100, description: "High quality product", available: true },
     { _id: 2, name: "Product B", manufacturer: "Brand Y", stock: 50, description: "Affordable product", available: true },
   ]);
   const [searchTerm, setSearchTerm] = useState("");
 
-  // Handle modal toggle
   const addProductModalSetting = () => setShowProductModal(!showProductModal);
   const updateProductModalSetting = (selectedProduct) => {
     setUpdateProduct(selectedProduct);
     setShowUpdateModal(!showUpdateModal);
   };
 
-  // Handle product search
   const handleSearchTerm = (e) => {
     setSearchTerm(e.target.value);
   };
 
-  // Filter products based on search term
   const filteredProducts = products.filter((product) =>
     product.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -56,7 +52,6 @@ export default function Inventory() {
             </div>
           </div>
 
-          {/* Product Table */}
           <ProductTable
             products={filteredProducts}
             updateProductModalSetting={updateProductModalSetting}
@@ -64,9 +59,7 @@ export default function Inventory() {
         </div>
 
         {showProductModal && (
-          <AddProduct
-            addProductModalSetting={addProductModalSetting}
-          />
+          <AddProduct addProductModalSetting={addProductModalSetting} />
         )}
         {showUpdateModal && (
           <UpdateProduct
