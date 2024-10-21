@@ -1,5 +1,7 @@
 import { useState } from "react";
 import ProductTable from "../components/Inventory/ProductTable";
+import AddProduct from "../components/Inventory/AddProduct"; // Ensure this import is correct
+import UpdateProduct from "../components/Inventory/UpdateProduct"; // Ensure this import is correct
 
 export default function Inventory() {
   const [showProductModal, setShowProductModal] = useState(false);
@@ -8,6 +10,24 @@ export default function Inventory() {
   const [products, setAllProducts] = useState([
     { _id: 1, name: "Product A", manufacturer: "Brand X", stock: 100, description: "High quality product", available: true },
     { _id: 2, name: "Product B", manufacturer: "Brand Y", stock: 50, description: "Affordable product", available: true },
+    { _id: 3, name: "Product C", manufacturer: "Brand Z", stock: 75, description: "Premium quality product", available: true },
+    { _id: 4, name: "Product D", manufacturer: "Brand A", stock: 200, description: "Value for money", available: true },
+    { _id: 5, name: "Product E", manufacturer: "Brand B", stock: 30, description: "Best in class", available: true },
+    { _id: 6, name: "Product F", manufacturer: "Brand C", stock: 120, description: "Highly recommended", available: true },
+    { _id: 7, name: "Product G", manufacturer: "Brand D", stock: 60, description: "Top rated product", available: true },
+    { _id: 8, name: "Product H", manufacturer: "Brand E", stock: 40, description: "Popular choice", available: true },
+    { _id: 9, name: "Product I", manufacturer: "Brand F", stock: 90, description: "Customer favorite", available: true },
+    { _id: 10, name: "Product J", manufacturer: "Brand G", stock: 110, description: "Best seller", available: true },
+    { _id: 11, name: "Product A", manufacturer: "Brand X", stock: 100, description: "High quality product", available: true },
+    { _id: 12, name: "Product B", manufacturer: "Brand Y", stock: 50, description: "Affordable product", available: true },
+    { _id: 13, name: "Product C", manufacturer: "Brand Z", stock: 75, description: "Premium quality product", available: true },
+    { _id: 14, name: "Product D", manufacturer: "Brand A", stock: 200, description: "Value for money", available: true },
+    { _id: 15, name: "Product E", manufacturer: "Brand B", stock: 30, description: "Best in class", available: true },
+    { _id: 16, name: "Product F", manufacturer: "Brand C", stock: 120, description: "Highly recommended", available: true },
+    { _id: 17, name: "Product G", manufacturer: "Brand D", stock: 60, description: "Top rated product", available: true },
+    { _id: 18, name: "Product H", manufacturer: "Brand E", stock: 40, description: "Popular choice", available: true },
+    { _id: 19, name: "Product I", manufacturer: "Brand F", stock: 90, description: "Customer favorite", available: true },
+    { _id: 20, name: "Product J", manufacturer: "Brand G", stock: 110, description: "Best seller", available: true },
   ]);
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -52,6 +72,7 @@ export default function Inventory() {
             </div>
           </div>
 
+          {/* Product Table */}
           <ProductTable
             products={filteredProducts}
             updateProductModalSetting={updateProductModalSetting}
@@ -59,7 +80,9 @@ export default function Inventory() {
         </div>
 
         {showProductModal && (
-          <AddProduct addProductModalSetting={addProductModalSetting} />
+          <AddProduct
+            addProductModalSetting={addProductModalSetting}
+          />
         )}
         {showUpdateModal && (
           <UpdateProduct
