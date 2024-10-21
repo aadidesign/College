@@ -23,6 +23,7 @@ export default function LoginPage() {
           name="description"
           content="Login to PCCOE Event Management to manage your events."
         />
+        <script src="https://cdn.tailwindcss.com"></script>
       </Head>
 
       <main className="flex min-h-screen">
