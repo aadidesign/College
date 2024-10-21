@@ -20,6 +20,5 @@ const userSchema = new mongoose.Schema({
   points: { type: Number, default: 0 }
 });
 
-const User = mongoose.model('User', userSchema);
-
+const User = mongoose.models.User || mongoose.model('User', UserSchema);
 module.exports = User;
