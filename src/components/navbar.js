@@ -11,7 +11,7 @@ const Navbar = () => {
           <p className='mx-2 text-black'>Pimpri Chinchwad College of Engineering - PCCOE</p>
         </div>
         <ul className="flex space-x-6 text-blue-900">
-          <li><Link href="/" className="hover:text-blue-600">Home</Link></li>
+          <li><Link href="/home" className="hover:text-blue-600">Home</Link></li>
           <li><Link href="/Attendance" className="hover:text-blue-600">Attendance</Link></li>
           <li><Link href="/calendar" className="hover:text-blue-600">calendar</Link></li>
           <li><Link href="/createevent" className="hover:text-blue-600">createevent</Link></li>
