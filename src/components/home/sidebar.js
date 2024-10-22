@@ -27,7 +27,7 @@ const Sidebar = () => {
         </li>
         <li className="flex items-center p-4 hover:bg-gray-200 cursor-pointer">
           <FaEnvelope className="mr-3" />
-          <Link href="/eventsSearchBar">Dashboard</Link> {/* Using Link for client-side navigation */}
+          <Link href="/eventSearchBar">Dashboard</Link> {/* Using Link for client-side navigation */}
         </li>
       </ul>
     </div>
