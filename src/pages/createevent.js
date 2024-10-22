@@ -59,7 +59,7 @@ export default function CreateEventPage() {
         formDataToSend.append(key, formData[key]);
       }
 
-      const response = await fetch("http://localhost:3000/api/lead/application", {
+      const response = await fetch("/api/lead/application", {
         method: "POST",
         body: formDataToSend,
       });
@@ -112,7 +112,7 @@ export default function CreateEventPage() {
                 <Link href="/about">About</Link>
               </li>
               <li className="hover:text-blue-300 transition-colors">
-                <Link href="/events">Events</Link>
+                <Link href="/event">Events</Link>
               </li>
               <li className="hover:text-blue-300 transition-colors">
                 <Link href="/createevent">Create Event</Link>

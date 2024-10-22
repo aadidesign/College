@@ -38,7 +38,7 @@ const RegisterPage = () => {
   return (
     <>
       <Head>
-        <title>Register - PCCOE Event Management</title>
+        <title>Login - PCCOE Event Management</title>
         <meta name="description" content="Register to manage your events" />
       </Head>
 
@@ -57,7 +57,7 @@ const RegisterPage = () => {
             className="w-full max-w-md space-y-8 bg-gray-100 p-8 rounded-lg shadow-lg"
           >
             <h2 className="text-3xl font-bold text-center text-blue-900">
-              Register
+              Login
             </h2>
 
             <div>
@@ -123,7 +123,7 @@ const RegisterPage = () => {
               type="submit"
               className="w-full bg-blue-900 text-white py-4 rounded-md font-semibold hover:bg-blue-700 transition-all duration-300 shadow-lg"
             >
-              Register
+              login
             </button>
 
             {message && (
@@ -131,9 +131,9 @@ const RegisterPage = () => {
             )}
 
             <p className="text-center">
-              Already have an account?{" "}
+              {/* Already have an account?{" "} */}
               <Link href="/home" className="text-blue-600 hover:underline">
-                Login
+                signup
               </Link>
             </p>
           </form>
