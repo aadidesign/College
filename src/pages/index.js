@@ -96,6 +96,12 @@ const RegisterPage = () => {
                 Student
               </Link>
             </p>
+            <p className="text-center">
+              {/* Already have an account?{" "} */}
+              <Link href="/facultydashboard" className="text-blue-600 hover:underline">
+                Faculty
+              </Link>
+            </p>
           </form>
         </div>
       </main>
