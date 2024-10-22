@@ -1,39 +1,36 @@
-"use client";
-
 import React, { useState } from "react";
+import axios from "axios";
 import Link from "next/link";
 import Head from "next/head";
 
-
-const PCCOE_LOGO_URL = "/src/app/images/logo.png"; // Update the logo path
-
-export default function LoginPage() {
+const RegisterPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle login logic here
+
+    try {
+      const response = await axios.post("/api/auth/auth", { email, password, action: "login" });
+      setMessage(response.data.message);
+    } catch (error) {
+      setMessage(error.response?.data?.error || "Registration failed");
+    }
   };
 
   return (
     <>
       <Head>
-        <title>Login - PCCOE Event Management</title>
-        <meta
-          name="description"
-          content="Login to PCCOE Event Management to manage your events."
-        />
+        <title>Register - PCCOE Event Management</title>
+        <meta name="description" content="Register to manage your events" />
         <script src="https://cdn.tailwindcss.com"></script>
       </Head>
 
       <main className="flex min-h-screen">
         <div className="flex-1 bg-blue-600 flex items-center justify-center p-10">
-          <img
-            src={PCCOE_LOGO_URL}
-            alt="PCCOE Logo"
-            className="w-48 h-48 mb-10 animate-fade-in"
-          />
+          {/* Update the logo path accordingly */}
+          <img src="/src/app/images/logo.png" alt="PCCOE Logo" className="w-48 h-48 mb-10" />
         </div>
 
         <div className="flex-1 flex items-center justify-center bg-white p-10">
@@ -42,13 +39,11 @@ export default function LoginPage() {
             className="w-full max-w-md space-y-8 bg-gray-100 p-8 rounded-lg shadow-lg"
           >
             <h2 className="text-3xl font-bold text-center text-blue-900">
-              Login
+              Register
             </h2>
+
             <div>
-              <label
-                htmlFor="email"
-                className="block mb-2 text-lg font-semibold text-blue-800"
-              >
+              <label htmlFor="email" className="block mb-2 text-lg font-semibold text-blue-800">
                 Email
               </label>
               <input
@@ -61,11 +56,9 @@ export default function LoginPage() {
                 required
               />
             </div>
+
             <div>
-              <label
-                htmlFor="password"
-                className="block mb-2 text-lg font-semibold text-blue-800"
-              >
+              <label htmlFor="password" className="block mb-2 text-lg font-semibold text-blue-800">
                 Password
               </label>
               <input
@@ -78,16 +71,20 @@ export default function LoginPage() {
                 required
               />
             </div>
+
             <button
               type="submit"
               className="w-full bg-blue-900 text-white py-4 rounded-md font-semibold hover:bg-blue-700 transition-all duration-300 shadow-lg"
             >
-              Login
+              Register
             </button>
+
+            {message && <p className="text-center text-red-500 mt-4">{message}</p>}
+
             <p className="text-center">
-              Don’t have an account?{" "}
-              <Link href="/register" className="text-blue-600 hover:underline">
-                Sign Up
+              Already have an account?{" "}
+              <Link href="/login" className="text-blue-600 hover:underline">
+                Login
               </Link>
             </p>
           </form>
@@ -95,4 +92,6 @@ export default function LoginPage() {
       </main>
     </>
   );
-}
+};
+
+export default RegisterPage;
