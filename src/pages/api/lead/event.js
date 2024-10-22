@@ -1,6 +1,6 @@
-import dbConnect from '../../../utils/dbConnect';
-import Event from '../../../models/Event';
-import { verifyAuth } from '../../../middleware/authenticate'; // Import the middleware
+import dbConnect from '../lib/dbConnect';
+import Event from 'root/pages/api/models/Event';
+import { verifyAuth } from 'root/pages/middlewares/verifyAuth'; // Import the middleware
 
 async function handler(req, res) {
     await dbConnect(); // Ensure the database connection

@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const Navbar = () => {
   return (
@@ -10,10 +11,10 @@ const Navbar = () => {
           <p className='mx-2 text-black'>Pimpri Chinchwad College of Engineering - PCCOE</p>
         </div>
         <ul className="flex space-x-6 text-blue-900">
-          <li><a href="/" className="hover:text-blue-600">Home</a></li>
-          <li><a href="#about" className="hover:text-blue-600">About</a></li>
-          <li><a href="#services" className="hover:text-blue-600">Services</a></li>
-          <li><a href="#contact" className="hover:text-blue-600">Contact</a></li>
+          <li><Link to="/" className="hover:text-blue-600">Home</Link></li>
+          <li><Link to="#about" className="hover:text-blue-600">About</Link></li>
+          <li><Link to="#services" className="hover:text-blue-600">Services</Link></li>
+          <li><Link to="#contact" className="hover:text-blue-600">Contact</Link></li>
         </ul>
       </div>
     </nav>

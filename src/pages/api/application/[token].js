@@ -1,5 +1,5 @@
-import dbConnect from '../../../lib/dbConnect';
-import { processApproval } from '../../../services/applicationService'; // move logic to service
+import dbConnect from '../lib/dbConnect';
+import { processApproval } from '../services/applicationService'; // move logic to service
 
 export default async function handler(req, res) {
   await dbConnect();

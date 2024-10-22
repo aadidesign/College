@@ -24,7 +24,7 @@ const RegisterPage = () => {
       <Head>
         <title>Register - PCCOE Event Management</title>
         <meta name="description" content="Register to manage your events" />
-        <script src="https://cdn.tailwindcss.com"></script>
+        {/* <script src="https://cdn.tailwindcss.com"></script> */}
       </Head>
 
       <main className="flex min-h-screen">

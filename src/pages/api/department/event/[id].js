@@ -1,6 +1,6 @@
 import dbConnect from "../../lib/dbConnect";
 import Department from "../../models/Department";
-import { verifyAuth } from "../../middleware/authenticate";
+import { verifyAuth } from "root/pages/middlewares/verifyAuth";
 
 async function handler(req, res) {
     await dbConnect();
