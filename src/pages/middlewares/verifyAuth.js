@@ -18,8 +18,10 @@ export const verifyAuth = (handler) => {
       // Verify the token
       const decoded = jwt.verify(token, JWT_SECRET);
 
-      // Attach the decoded user data to the request object
-      if(decoded.role !== 'clublead' || decoded.role !== 'admin' || decoded.role !== 'department') {
+      console.log(decoded.userRole);
+
+      // Role check: only allow specific roles
+      if (decoded.userRole !== "clublead" && decoded.userRole !== "admin" && decoded.userRole !== "department") {
         return res.status(403).json({ message: 'You are not authorized to access this resource' });
       }
 

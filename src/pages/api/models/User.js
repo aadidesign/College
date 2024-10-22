@@ -13,12 +13,12 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
   role: {
     type: String,
-    enum: ['clublead', 'admin', 'department'],
+    enum: ['clublead', 'admin', 'department', 'faculty', 'hod'],
     required: true
   },
   department_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Department' },
   points: { type: Number, default: 0 }
 });
 
-const User = mongoose.models.User || mongoose.model('User', UserSchema);
+const User = mongoose.models.User || mongoose.model('User', userSchema);
 module.exports = User;
