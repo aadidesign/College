@@ -5,7 +5,7 @@ import { Line, Bar } from 'react-chartjs-2';
 import { motion } from 'framer-motion';
 import { Chart as ChartJS, LinearScale, CategoryScale, PointElement, LineElement, BarElement, Tooltip, Legend } from 'chart.js';
 // import 'react-datepicker/dist/react-datepicker.css'; // Include DatePicker CSS
-// import DatePicker from 'react-datepicker';
+import DatePicker from 'react-datepicker';
 
 // Registering necessary Chart.js components
 ChartJS.register(LinearScale, CategoryScale, PointElement, LineElement, BarElement, Tooltip, Legend);
