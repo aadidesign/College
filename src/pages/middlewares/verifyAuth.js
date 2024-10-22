@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret_key';
 
 // Middleware function to verify JWT
-export const verifyAuth = (handler) => {
+const verifyAuth = (handler) => {
   return async (req, res) => {
     const authHeader = req.headers.authorization;
 
@@ -21,7 +21,7 @@ export const verifyAuth = (handler) => {
       console.log(decoded.userRole);
 
       // Role check: only allow specific roles
-      if (decoded.userRole !== "clublead" && decoded.userRole !== "admin" && decoded.userRole !== "department") {
+      if (!["clublead", "admin", "department"].includes(decoded.userRole)) {
         return res.status(403).json({ message: 'You are not authorized to access this resource' });
       }
 
@@ -32,3 +32,5 @@ export const verifyAuth = (handler) => {
     }
   };
 };
+
+export default verifyAuth;
