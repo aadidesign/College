@@ -43,11 +43,11 @@ const RegisterPage = () => {
       </Head>
 
       <main className="flex min-h-screen">
-        <div className="flex-1 bg-blue-600 flex items-center justify-center p-10">
+        <div className="flex-1 flex items-center justify-center p-10">
           <img
-            src="/src/app/images/logo.png"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLR9BOqjh7PtxtZ_uxCL9AIMtGusfE7lc6cw&s"
             alt="PCCOE Logo"
-            className="w-48 h-48 mb-10"
+            className="w-[350px] h-[350px] mb-10"
           />
         </div>
 

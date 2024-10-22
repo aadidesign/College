@@ -4,10 +4,10 @@ import Link from 'next/link';
 
 const Navbar = () => {
   return (
-    <nav className="bg-white shadow-md  px-8 shadow-xl">
+    <nav className="bg-white  px-8">
       <div className="container mx-auto flex justify-between items-center">
         <div className='flex items-center justify-center'>
-          <Image src="/Images/logo.webp" alt="logo" width={100} height={100} />
+          <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLR9BOqjh7PtxtZ_uxCL9AIMtGusfE7lc6cw&s' className='w-[50px]'/>
           <p className='mx-2 text-black'>Pimpri Chinchwad College of Engineering - PCCOE</p>
         </div>
         <ul className="flex space-x-6 text-blue-900">
