@@ -72,18 +72,21 @@ const RegisterPage = () => {
               />
             </div>
 
+            <Link href="/home">
             <button
               type="submit"
+              href="/home"
               className="w-full bg-blue-900 text-white py-4 rounded-md font-semibold hover:bg-blue-700 transition-all duration-300 shadow-lg"
             >
               Register
             </button>
+            </Link>
 
             {message && <p className="text-center text-red-500 mt-4">{message}</p>}
 
             <p className="text-center">
               Already have an account?{" "}
-              <Link href="/login" className="text-blue-600 hover:underline">
+              <Link href="/home" className="text-blue-600 hover:underline">
                 Login
               </Link>
             </p>
