@@ -80,8 +80,7 @@ const StudentDashboard = () => {
   };
 
   return (
-    <div className={`container mx-auto p-6 ${darkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'} transition-all`}>
-      {/* Header */}
+    <div className={`container mx-auto p-6 ${darkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'}`}>
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-4xl font-bold">Student Dashboard</h1>
         <button onClick={() => setDarkMode(!darkMode)} className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition">
@@ -96,36 +95,32 @@ const StudentDashboard = () => {
           placeholder="Search..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="flex-1 p-3 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition"
+          className="flex-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition"
         />
-        <button className="ml-2 bg-blue-500 text-white py-3 px-4 rounded-md hover:bg-blue-600 transition">
+        <button className="ml-2 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition">
           <FaSearch />
         </button>
       </div>
 
       {/* User Profile Section */}
-      <div className="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg shadow-lg mb-8 transition-all">
+      <div className="bg-gray-100 p-6 rounded-lg shadow-lg mb-8">
         <h2 className="text-2xl font-semibold mb-4">User Profile</h2>
         <div className="flex items-center space-x-4">
-          <img
-            className="h-20 w-20 rounded-full border-2 border-gray-300 shadow-md"
-            src="https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o="
-            alt="Profile"
-          />
+          <img className="h-20 w-20 rounded-full border-2 border-gray-300 shadow-md" src="/path/to/profile-picture.jpg" alt="Profile" />
           <div>
             <p className="text-lg font-bold">John Doe</p>
-            <p className="text-gray-600 dark:text-gray-300">Major: Computer Science</p>
-            <p className="text-gray-600 dark:text-gray-300">Interests: AI, Web Development</p>
-            <p className="text-gray-600 dark:text-gray-300">Year: 3rd Year</p>
-            <p className="text-gray-600 dark:text-gray-300">Student ID: 123456</p>
-            <p className="text-gray-600 dark:text-gray-300">Email: johndoe@pccoepune.org</p>
+            <p className="text-gray-600">Major: Computer Science</p>
+            <p className="text-gray-600">Interests: AI, Web Development</p>
+            <p className="text-gray-600">Year: 3rd Year</p>
+            <p className="text-gray-600">Student ID: 123456</p>
+            <p className="text-gray-600">Email: johndoe@pccoepune.org</p>
           </div>
         </div>
         <div className="mt-4">
           <h3 className="text-xl font-semibold mb-2">Achievements:</h3>
           <div className="flex flex-wrap">
             {badges.map((badge, index) => (
-              <span key={index} className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-300 text-sm font-medium mr-2 mb-2 px-2.5 py-0.5 rounded-md">
+              <span key={index} className="bg-blue-100 text-blue-800 text-sm font-medium mr-2 mb-2 px-2.5 py-0.5 rounded-md">
                 {badge}
               </span>
             ))}
@@ -135,13 +130,11 @@ const StudentDashboard = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         {/* Upcoming Events */}
-        <div className="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105">
-          <h2 className="text-2xl font-semibold mb-4">
-            Upcoming Events <FaInfoCircle className="inline text-gray-400" title="Events you have registered for." />
-          </h2>
+        <div className="bg-gray-100 p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105">
+          <h2 className="text-2xl font-semibold mb-4">Upcoming Events <FaInfoCircle className="inline text-gray-400" title="Events you have registered for." /></h2>
           <div className="accordion">
             {upcomingEvents.map((event, index) => (
-              <div key={index} className="border-b py-4 last:border-b-0 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 transition" onClick={() => handleEventClick(event)}>
+              <div key={index} className="border-b py-4 last:border-b-0 cursor-pointer hover:bg-gray-200 transition" onClick={() => handleEventClick(event)}>
                 <p className="text-lg font-medium">{event.name}</p>
                 <p>{event.date} at {event.time}</p>
                 <p>Countdown: {Math.floor((new Date(event.date) - new Date()) / (1000 * 60 * 60 * 24))} days left</p>
@@ -151,17 +144,17 @@ const StudentDashboard = () => {
         </div>
 
         {/* Participation Metrics */}
-        <div className="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105">
+        <div className="bg-gray-100 p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105">
           <h2 className="text-2xl font-semibold mb-4">Participation Metrics</h2>
           <Line data={participationData} options={{ responsive: true, plugins: { legend: { display: true } } }} />
         </div>
 
         {/* Notifications */}
-        <div className="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105">
+        <div className="bg-gray-100 p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105">
           <h2 className="text-2xl font-semibold mb-4">Notifications</h2>
           <ul className="space-y-2">
             {notifications.map((note, index) => (
-              <li key={index} className={`flex items-center p-2 rounded-md ${note.isNew ? 'bg-blue-100 dark:bg-blue-800' : 'bg-gray-200 dark:bg-gray-600'} hover:bg-gray-300 dark:hover:bg-gray-500 transition`}>
+              <li key={index} className={`flex items-center p-2 rounded-md ${note.isNew ? 'bg-blue-100' : 'bg-gray-200'} hover:bg-gray-300 transition`}>
                 <FaBell className="text-blue-500 mr-3" />
                 <span>{note.message}</span>
               </li>
@@ -171,11 +164,11 @@ const StudentDashboard = () => {
       </div>
 
       {/* Upcoming Deadlines */}
-      <div className="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg shadow-lg mb-8">
+      <div className="bg-gray-100 p-6 rounded-lg shadow-lg mb-8">
         <h2 className="text-2xl font-semibold mb-4">Upcoming Deadlines</h2>
         <ul className="space-y-2">
           {upcomingDeadlines.map((deadline, index) => (
-            <li key={index} className="flex justify-between p-2 bg-gray-200 dark:bg-gray-600 rounded-md hover:bg-gray-300 dark:hover:bg-gray-500 transition">
+            <li key={index} className="flex justify-between p-2 bg-gray-200 rounded-md hover:bg-gray-300 transition">
               <span>{deadline.task}</span>
               <span>{deadline.date}</span>
             </li>
@@ -184,34 +177,34 @@ const StudentDashboard = () => {
       </div>
 
       {/* Peer Comparison */}
-      <div className="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg shadow-lg mb-8">
+      <div className="bg-gray-100 p-6 rounded-lg shadow-lg mb-8">
         <h2 className="text-2xl font-semibold mb-4">Peer Comparison</h2>
         <p>Your Events Participated: <span className="font-bold text-blue-500">{peerComparison.yourParticipation}</span></p>
         <p>Peer Average: <span className="font-bold text-blue-500">{peerComparison.peerAverage}</span></p>
       </div>
 
       {/* Calendar */}
-      <div className="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg shadow-lg mb-8">
+      <div className="bg-gray-100 p-6 rounded-lg shadow-lg mb-8">
         <h2 className="text-2xl font-semibold mb-4">Calendar</h2>
         <Calendar />
       </div>
 
       {/* Discussion Forum */}
-      <div className="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg shadow-lg mb-8">
-        <h2 className="text-2xl font-semibold mb-4">Discussion Topics</h2>
-        <ul className="space-y-2">
-          {discussionTopics.map((topic, index) => (
-            <li key={index} className="flex justify-between items-center p-2 bg-gray-200 dark:bg-gray-600 rounded-md hover:bg-gray-300 dark:hover:bg-gray-500 transition">
-              <span className="text-gray-700 dark:text-gray-300">{topic}</span>
-            </li>
-          ))}
-        </ul>
-        {/* Start Discussion Button */}
-        <button className="mt-4 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition flex items-center">
-          <FaPlusCircle className="mr-2" />
-          Start Discussion
-        </button>
-      </div>
+<div className="bg-gray-100 p-6 rounded-lg shadow-lg mb-8">
+  <h2 className="text-2xl font-semibold mb-4">Discussion Topics</h2>
+  <ul className="space-y-2">
+    {discussionTopics.map((topic, index) => (
+      <li key={index} className="flex justify-between items-center p-2 bg-gray-200 rounded-md hover:bg-gray-300 transition">
+        <span className="text-gray-700">{topic}</span>
+      </li>
+    ))}
+  </ul>
+  {/* Start Discussion Button */}
+  <button className="mt-4 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition flex items-center">
+    <FaPlusCircle className="mr-2" />
+    Start Discussion
+  </button>
+</div>
 
       {/* Modal for Event Details */}
       <Modal isOpen={modalOpen} close={() => setModalOpen(false)} event={selectedEvent} />

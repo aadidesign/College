@@ -132,7 +132,7 @@ const RegisterPage = () => {
 
             <p className="text-center">
               Don't have an account?{" "}
-              <Link href="/home" className="text-blue-600 hover:underline">
+              <Link href="/studentregistration" className="text-blue-600 hover:underline">
                 signup
               </Link>
             </p>
