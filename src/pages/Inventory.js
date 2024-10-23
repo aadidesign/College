@@ -56,7 +56,7 @@ export default function Inventory() {
               <span className="font-thin text-gray-400 text-xs">Last 7 days</span>
             </div>
             <div className="flex flex-col gap-3 p-10 w-full md:w-3/12 sm:border-y-2 md:border-x-2 md:border-y-0">
-              <span className="font-semibold text-yellow-600 text-base">Stores</span>
+              <span className="font-semibold text-yellow-600 text-base">Available Products</span>
               <div className="flex gap-8">
                 <div className="flex flex-col">
                   <span className="font-semibold text-gray-600 text-base">{totalStores}</span>
@@ -69,7 +69,7 @@ export default function Inventory() {
               </div>
             </div>
             <div className="flex flex-col gap-3 p-10 w-full md:w-3/12 sm:border-y-2 md:border-x-2 md:border-y-0">
-              <span className="font-semibold text-purple-600 text-base">Top Selling</span>
+              <span className="font-semibold text-purple-600 text-base">Total Stock</span>
               <div className="flex gap-8">
                 <div className="flex flex-col">
                   <span className="font-semibold text-gray-600 text-base">{topSellingCount}</span>
@@ -82,7 +82,7 @@ export default function Inventory() {
               </div>
             </div>
             <div className="flex flex-col gap-3 p-10 w-full md:w-3/12 border-y-2 md:border-x-2 md:border-y-0">
-              <span className="font-semibold text-red-600 text-base">Low Stocks</span>
+              <span className="font-semibold text-red-600 text-base">Unavailable</span>
               <div className="flex gap-8">
                 <div className="flex flex-col">
                   <span className="font-semibold text-gray-600 text-base">{lowStockCount}</span>
