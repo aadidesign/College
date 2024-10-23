@@ -1,16 +1,14 @@
-import Navbar from 'root/components/navbar';
-import { MyProvider } from '../context/MyContext';
-import './page.css'
-// import Sidebar from 'root/components/home/sidebar';
+import { SessionProvider } from 'next-auth/react';
+import MyContext from 'root/context/MyContext';
 
-function App({ Component, pageProps }) {
-  return (
-    <MyProvider>
-      <Navbar/>
-      {/* <Sidebar/> */}
-      <Component {...pageProps} />
-    </MyProvider>
-  );
+function MyApp({ Component, pageProps }) {
+    return (
+        <SessionProvider session={pageProps.session}>
+            <MyContext>
+            <Component {...pageProps} />
+            </MyContext>
+        </SessionProvider>
+    );
 }
 
-export default App;
+export default MyApp;
