@@ -1,11 +1,8 @@
 "use client";
 import { useState } from "react";
 import Image from 'next/image';
-// import { useRouter } from 'next/router'; // Import useRouter
-import { red } from "@mui/material/colors";
 
 const LoginPage = () => {
-  // const router = useRouter(); // Initialize the router
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -13,19 +10,43 @@ const LoginPage = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
+  // Function to handle form submission
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       setError("Passwords do not match!");
-    } else {
-      setError("");
-      // Add authentication logic here
-      console.log("Email:", email);
-      console.log("Username:", username);
-      console.log("Phone Number:", phoneNumber);
-      console.log("Password:", password);
-      // Redirect to the home page after successful submission
-      // router.push('/home'); // Use router.push for redirection
+      return;
+    }
+    setError("");
+
+    const userData = {
+      email,
+      username,
+      phoneNumber,
+      password,
+    };
+
+    try {
+      const response = await fetch('https://orange-garbanzo-9pq54p5jp7r2p9x4-3000.app.github.dev/api/auth/auth', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        console.log('Registration successful:', result);
+        // Redirect to the home page after successful registration
+        window.location.href = "/pages/home";
+      } else {
+        const errorData = await response.json();
+        setError(errorData.message || 'Registration failed!');
+      }
+    } catch (err) {
+      setError('An error occurred. Please try again later.');
+      console.error('Error:', err);
     }
   };
 
@@ -168,7 +189,6 @@ const LoginPage = () => {
                 <button
                   type="submit"
                   className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-300"
-                  onClick={() => window.location.href = "/pages/home"}
                 >
                   Sign In
                 </button>

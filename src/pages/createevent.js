@@ -9,6 +9,21 @@ const PCCOE_LOGO_URL = "/path/to/pccoe-logo.png"; // Update the logo path
 
 export default function CreateEventPage() {
   const [scrolled, setScrolled] = useState(false);
+  const [formData, setFormData] = useState({
+    eventName: "",
+    eventDate: "",
+    eventStartTime: "",
+    eventEndTime: "",
+    eventVenue: "",
+    eventType: "Workshop",
+    participantsNumber: "",
+    coordinatorName: "",
+    coordinatorContact: "",
+    registrationLink: "",
+    eventBanner: null,
+  });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,6 +39,42 @@ export default function CreateEventPage() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const handleInputChange = (e) => {
+    const { id, value, files } = e.target;
+    if (id === "event-banner") {
+      setFormData({ ...formData, eventBanner: files[0] });
+    } else {
+      setFormData({ ...formData, [id]: value });
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const formDataToSend = new FormData();
+      for (const key in formData) {
+        formDataToSend.append(key, formData[key]);
+      }
+
+      const response = await fetch("/api/lead/application", {
+        method: "POST",
+        body: formDataToSend,
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to submit the event. Please try again.");
+      }
+
+      alert("Event created successfully!");
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <>
@@ -61,7 +112,7 @@ export default function CreateEventPage() {
                 <Link href="/about">About</Link>
               </li>
               <li className="hover:text-blue-300 transition-colors">
-                <Link href="/events">Events</Link>
+                <Link href="/event">Events</Link>
               </li>
               <li className="hover:text-blue-300 transition-colors">
                 <Link href="/createevent">Create Event</Link>
@@ -94,7 +145,10 @@ export default function CreateEventPage() {
             <h2 className="text-center text-4xl font-bold mb-10 text-blue-900">
               Event Details
             </h2>
-            <form className="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-xl space-y-8">
+            <form
+              className="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-xl space-y-8"
+              onSubmit={handleSubmit}
+            >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                 <div className="flex flex-col">
                   <label
@@ -105,9 +159,11 @@ export default function CreateEventPage() {
                   </label>
                   <input
                     type="text"
-                    id="event-name"
+                    id="eventName"
                     placeholder="Enter event name"
                     className="border border-gray-300 rounded-md p-4 focus:ring-2 focus:ring-blue-600"
+                    value={formData.eventName}
+                    onChange={handleInputChange}
                     required
                   />
                 </div>
@@ -121,8 +177,10 @@ export default function CreateEventPage() {
                   </label>
                   <input
                     type="date"
-                    id="event-date"
+                    id="eventDate"
                     className="border border-gray-300 rounded-md p-4 focus:ring-2 focus:ring-blue-600"
+                    value={formData.eventDate}
+                    onChange={handleInputChange}
                     required
                   />
                 </div>
@@ -136,8 +194,10 @@ export default function CreateEventPage() {
                   </label>
                   <input
                     type="time"
-                    id="event-start-time"
+                    id="eventStartTime"
                     className="border border-gray-300 rounded-md p-4 focus:ring-2 focus:ring-blue-600"
+                    value={formData.eventStartTime}
+                    onChange={handleInputChange}
                     required
                   />
                 </div>
@@ -151,8 +211,10 @@ export default function CreateEventPage() {
                   </label>
                   <input
                     type="time"
-                    id="event-end-time"
+                    id="eventEndTime"
                     className="border border-gray-300 rounded-md p-4 focus:ring-2 focus:ring-blue-600"
+                    value={formData.eventEndTime}
+                    onChange={handleInputChange}
                     required
                   />
                 </div>
@@ -166,9 +228,11 @@ export default function CreateEventPage() {
                   </label>
                   <input
                     type="text"
-                    id="event-venue"
+                    id="eventVenue"
                     placeholder="Enter event venue"
                     className="border border-gray-300 rounded-md p-4 focus:ring-2 focus:ring-blue-600"
+                    value={formData.eventVenue}
+                    onChange={handleInputChange}
                     required
                   />
                 </div>
@@ -181,8 +245,10 @@ export default function CreateEventPage() {
                     Event Type
                   </label>
                   <select
-                    id="event-type"
+                    id="eventType"
                     className="border border-gray-300 rounded-md p-4 focus:ring-2 focus:ring-blue-600"
+                    value={formData.eventType}
+                    onChange={handleInputChange}
                     required
                   >
                     <option value="Workshop">Workshop</option>
@@ -203,45 +269,49 @@ export default function CreateEventPage() {
                 </label>
                 <input
                   type="number"
-                  id="participants-number"
+                  id="participantsNumber"
                   placeholder="Enter number of participants"
                   className="border border-gray-300 rounded-md p-4 focus:ring-2 focus:ring-blue-600"
+                  value={formData.participantsNumber}
+                  onChange={handleInputChange}
                   required
                 />
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                <div className="flex flex-col">
-                  <label
-                    htmlFor="coordinator-name"
-                    className="mb-2 text-lg font-semibold text-blue-800"
-                  >
-                    Event Coordinator Name
-                  </label>
-                  <input
-                    type="text"
-                    id="coordinator-name"
-                    placeholder="Enter coordinator name"
-                    className="border border-gray-300 rounded-md p-4 focus:ring-2 focus:ring-blue-600"
-                    required
-                  />
-                </div>
+              <div className="flex flex-col">
+                <label
+                  htmlFor="coordinator-name"
+                  className="mb-2 text-lg font-semibold text-blue-800"
+                >
+                  Coordinator Name
+                </label>
+                <input
+                  type="text"
+                  id="coordinatorName"
+                  placeholder="Enter coordinator's name"
+                  className="border border-gray-300 rounded-md p-4 focus:ring-2 focus:ring-blue-600"
+                  value={formData.coordinatorName}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
 
-                <div className="flex flex-col">
-                  <label
-                    htmlFor="coordinator-contact"
-                    className="mb-2 text-lg font-semibold text-blue-800"
-                  >
-                    Event Coordinator Contact
-                  </label>
-                  <input
-                    type="text"
-                    id="coordinator-contact"
-                    placeholder="Enter coordinator contact details"
-                    className="border border-gray-300 rounded-md p-4 focus:ring-2 focus:ring-blue-600"
-                    required
-                  />
-                </div>
+              <div className="flex flex-col">
+                <label
+                  htmlFor="coordinator-contact"
+                  className="mb-2 text-lg font-semibold text-blue-800"
+                >
+                  Coordinator Contact
+                </label>
+                <input
+                  type="tel"
+                  id="coordinatorContact"
+                  placeholder="Enter coordinator's contact number"
+                  className="border border-gray-300 rounded-md p-4 focus:ring-2 focus:ring-blue-600"
+                  value={formData.coordinatorContact}
+                  onChange={handleInputChange}
+                  required
+                />
               </div>
 
               <div className="flex flex-col">
@@ -249,13 +319,16 @@ export default function CreateEventPage() {
                   htmlFor="registration-link"
                   className="mb-2 text-lg font-semibold text-blue-800"
                 >
-                  Event Registration Link
+                  Registration Link
                 </label>
                 <input
                   type="url"
-                  id="registration-link"
-                  placeholder="Enter registration link (if any)"
+                  id="registrationLink"
+                  placeholder="Enter registration link"
                   className="border border-gray-300 rounded-md p-4 focus:ring-2 focus:ring-blue-600"
+                  value={formData.registrationLink}
+                  onChange={handleInputChange}
+                  required
                 />
               </div>
 
@@ -264,33 +337,38 @@ export default function CreateEventPage() {
                   htmlFor="event-banner"
                   className="mb-2 text-lg font-semibold text-blue-800"
                 >
-                  Upload Event Banner
+                  Event Banner
                 </label>
                 <input
                   type="file"
                   id="event-banner"
                   className="border border-gray-300 rounded-md p-4 focus:ring-2 focus:ring-blue-600"
+                  onChange={handleInputChange}
                   accept="image/*"
                   required
                 />
               </div>
 
-              <button
-                type="submit"
-                className="w-full bg-blue-600 text-white font-bold py-4 rounded-md hover:bg-blue-700 transition-colors"
-              >
-                Create Event
-              </button>
+              {loading ? (
+                <p className="text-center text-blue-600 font-semibold">
+                  Submitting event...
+                </p>
+              ) : (
+                <button
+                  type="submit"
+                  className="w-full bg-blue-600 text-white py-4 rounded-md font-bold hover:bg-blue-700 transition-all duration-300"
+                >
+                  Create Event
+                </button>
+              )}
+
+              {error && (
+                <p className="text-red-600 text-center mt-4">{error}</p>
+              )}
             </form>
           </div>
         </section>
       </main>
-
-      <footer className="bg-blue-900 text-white py-4 text-center">
-        <p className="text-sm">
-          © {new Date().getFullYear()} PCCOE Event Management. All rights reserved.
-        </p>
-      </footer>
     </>
   );
 }

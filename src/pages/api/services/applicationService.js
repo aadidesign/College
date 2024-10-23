@@ -1,5 +1,5 @@
 import Application from '../models/Application';
-import { sendMail } from '../lib/sendMail';
+import { sendMail } from '../lib/sendEmail';
 import { generateApprovalLink } from '../utils/helpers';
 
 export const processApproval = async (token, action, role, rejectReason) => {

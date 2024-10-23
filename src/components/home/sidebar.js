@@ -15,15 +15,19 @@ const Sidebar = () => {
         </li>
         <li className="flex items-center p-4 hover:bg-gray-200 cursor-pointer">
           <FaInfoCircle className="mr-3" />
-          <Link href="/pages/calendar">Calender</Link> {/* Fixed navigation to Calendar page */}
+          <Link href="/calendar">Calender</Link> {/* Fixed navigation to Calendar page */}
         </li>
         <li className="flex items-center p-4 hover:bg-gray-200 cursor-pointer">
           <FaServicestack className="mr-3" />
-          <Link href="/pages/createEvent">Create event</Link> {/* Using Link for client-side navigation */}
+          <Link href="/createEvent">Create event</Link> {/* Using Link for client-side navigation */}
         </li>
         <li className="flex items-center p-4 hover:bg-gray-200 cursor-pointer">
           <FaEnvelope className="mr-3" />
-          <Link href="/pages/eventsSearchBar">Dashboard</Link> {/* Using Link for client-side navigation */}
+          <Link href="/eventsSearchBar">Dashboard</Link> {/* Using Link for client-side navigation */}
+        </li>
+        <li className="flex items-center p-4 hover:bg-gray-200 cursor-pointer">
+          <FaEnvelope className="mr-3" />
+          <Link href="/eventSearchBar">Dashboard</Link> {/* Using Link for client-side navigation */}
         </li>
       </ul>
     </div>

@@ -1,3 +1,42 @@
+// src/models/Inventory.js
+import mongoose from 'mongoose';
+
+const InventorySchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true,
+    },
+    quantity: {
+        type: Number,
+        required: true,
+    },
+    usage: [
+        {
+            eventId: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Event',
+            },
+            quantityUsed: {
+                type: Number,
+                required: true,
+            },
+            usedAt: {
+                type: Date,
+                default: Date.now,
+            },
+        },
+    ],
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    },
+    updatedAt: {
+        type: Date,
+        default: Date.now,
+    },
+});
+
+export default mongoose.models.Inventory || mongoose.model('Inventory', InventorySchema);
 const mongoose = require('mongoose');
 
 const inventorySchema = new mongoose.Schema({

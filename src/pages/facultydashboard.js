@@ -251,6 +251,10 @@ const FacultyDashboard = () => {
         />
       </div>
 
+      <div>
+        <button className='m-2 p-2 bg-blue-500'>Attendance Take</button>
+      </div>
+
       {/* Event Details Modal */}
       <Modal isOpen={modalIsOpen} onRequestClose={closeModal} className="modal" overlayClassName="overlay">
         <h2 className="text-2xl font-semibold">{eventDetails?.name}</h2>

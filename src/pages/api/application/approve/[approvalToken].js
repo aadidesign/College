@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid'; // To generate a unique token
 import nodemailer from 'nodemailer';
 import dbConnect from '../../lib/dbConnect';
 import Application from '../../models/Application';
-import { sendMail } from '../../lib/sendMail'; // Assuming you have a reusable sendMail function
+import { sendMail } from '../../lib/sendEmail'; // Assuming you have a reusable sendMail function
 
 export default async function handler(req, res) {
     await dbConnect(); // Ensure the database connection

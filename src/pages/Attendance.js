@@ -1,6 +1,7 @@
 // pages/index.js
 import { useState } from "react";
-import ClassCard from "../components/Attendance/ClassCard";
+import ClassCard from "../components/Attendance/EventCard";
+import Link from "next/link";
 
 export default function Home() {
   // Sample classes data with `attendanceTaken` property
@@ -42,9 +43,10 @@ export default function Home() {
       {/* Header */}
       <header className="flex justify-between items-center mb-8">
         <h1 className="text-2xl font-semibold">Hii, Devendra</h1>
-        <button className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600">
-          + Add Class
-        </button>
+        <Link href='/AttendanceTake'>
+        <button  className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600">
+          take Attendance
+        </button></Link>
       </header>
 
       {/* Navigation */}
