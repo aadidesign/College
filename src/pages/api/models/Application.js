@@ -14,12 +14,16 @@ const applicationSchema = new mongoose.Schema({
     event_id: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }],
     
     // Inventory-related request (optional)
-    inventory_id: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Inventory' }],
+    inventory_id: [{
+        type: String
+    }],
     
     // Venue-related request (optional)
-    venue_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Venue' },
+    venue_id: { 
+        type: String
+     },
     
-    approvalToken: { type: String, required: true },  // Unique token for approval link
+    approvalToken: { type: String },  // Unique token for approval link
     tokenExpiry: { type: Date },  // Optional: Add expiry to approvalToken
     
     status: {
@@ -69,6 +73,6 @@ applicationSchema.pre('save', function(next) {
     next();
 });
 
-const Application = mongoose.model('Application', applicationSchema);
+const Application = mongoose.models.Application || mongoose.model('Application', applicationSchema);
 
 module.exports = Application;

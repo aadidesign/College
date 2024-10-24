@@ -1,6 +1,6 @@
 // src/pages/api/admin/events.js
-import dbConnect from '../../../lib/dbConnect';
-import Event from '../../../models/Event';
+import dbConnect from '../lib/dbConnect';
+import Event from '../models/Event';
 
 export default async function handler(req, res) {
     try {

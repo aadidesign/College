@@ -13,11 +13,7 @@
     "@emotion/styled": "^11.13.0",
     "@mui/material": "^6.1.4",
     "@mui/x-date-pickers": "^7.21.0",
-<<<<<<< HEAD
-    "aos": "^2.3.4",
-=======
     "axios": "^1.7.7",
->>>>>>> dde7ab8f92cf0798ae65baff71c326d44c314719
     "bcryptjs": "^2.4.3",
     "chart.js": "^4.4.5",
     "date-fns": "^4.1.0",

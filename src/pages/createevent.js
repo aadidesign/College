@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Head from "next/head";
@@ -10,17 +8,13 @@ const PCCOE_LOGO_URL = "/path/to/pccoe-logo.png"; // Update the logo path
 export default function CreateEventPage() {
   const [scrolled, setScrolled] = useState(false);
   const [formData, setFormData] = useState({
-    eventName: "",
-    eventDate: "",
-    eventStartTime: "",
-    eventEndTime: "",
-    eventVenue: "",
-    eventType: "Workshop",
-    participantsNumber: "",
-    coordinatorName: "",
-    coordinatorContact: "",
-    registrationLink: "",
-    eventBanner: null,
+    title: "",
+    description: "",
+    venue_id: "",
+    date: "",
+    time: "",
+    inventory_id: "",
+    additional_details: "",
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -54,14 +48,20 @@ export default function CreateEventPage() {
     setLoading(true);
 
     try {
-      const formDataToSend = new FormData();
-      for (const key in formData) {
-        formDataToSend.append(key, formData[key]);
-      }
-
-      const response = await fetch("/api/lead/application", {
+      const response = await fetch("/api/clublead/event/create/application", {
         method: "POST",
-        body: formDataToSend,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title: formData.title,
+          description: formData.description,
+          venue_id: formData.venue_id,
+          date: formData.date,
+          time: formData.time,
+          inventory_id: formData.inventory_id,
+          additional_details: formData.additional_details,
+        }),
       });
 
       if (!response.ok) {
@@ -84,6 +84,7 @@ export default function CreateEventPage() {
           name="description"
           content="Create an event for PCCOE with enhanced UI and UX using Next.js."
         />
+         <script src="https://cdn.tailwindcss.com"></script>
       </Head>
 
       <header
@@ -97,8 +98,8 @@ export default function CreateEventPage() {
               <Image
                 src={PCCOE_LOGO_URL}
                 alt="PCCOE Logo"
-                width={48} // Set the width of the logo
-                height={48} // Set the height of the logo
+                width={48} 
+                height={48} 
                 className="hover:scale-105 transition-transform"
               />
             </Link>
@@ -152,17 +153,17 @@ export default function CreateEventPage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                 <div className="flex flex-col">
                   <label
-                    htmlFor="event-name"
+                    htmlFor="title"
                     className="mb-2 text-lg font-semibold text-blue-800"
                   >
                     Event Name
                   </label>
                   <input
                     type="text"
-                    id="eventName"
+                    id="title"
                     placeholder="Enter event name"
                     className="border border-gray-300 rounded-md p-4 focus:ring-2 focus:ring-blue-600"
-                    value={formData.eventName}
+                    value={formData.title}
                     onChange={handleInputChange}
                     required
                   />
@@ -170,16 +171,16 @@ export default function CreateEventPage() {
 
                 <div className="flex flex-col">
                   <label
-                    htmlFor="event-date"
+                    htmlFor="date"
                     className="mb-2 text-lg font-semibold text-blue-800"
                   >
                     Event Date
                   </label>
                   <input
                     type="date"
-                    id="eventDate"
+                    id="date"
                     className="border border-gray-300 rounded-md p-4 focus:ring-2 focus:ring-blue-600"
-                    value={formData.eventDate}
+                    value={formData.date}
                     onChange={handleInputChange}
                     required
                   />
@@ -187,16 +188,16 @@ export default function CreateEventPage() {
 
                 <div className="flex flex-col">
                   <label
-                    htmlFor="event-start-time"
+                    htmlFor="time"
                     className="mb-2 text-lg font-semibold text-blue-800"
                   >
                     Event Start Time
                   </label>
                   <input
                     type="time"
-                    id="eventStartTime"
+                    id="time"
                     className="border border-gray-300 rounded-md p-4 focus:ring-2 focus:ring-blue-600"
-                    value={formData.eventStartTime}
+                    value={formData.time}
                     onChange={handleInputChange}
                     required
                   />
@@ -204,34 +205,17 @@ export default function CreateEventPage() {
 
                 <div className="flex flex-col">
                   <label
-                    htmlFor="event-end-time"
-                    className="mb-2 text-lg font-semibold text-blue-800"
-                  >
-                    Event End Time
-                  </label>
-                  <input
-                    type="time"
-                    id="eventEndTime"
-                    className="border border-gray-300 rounded-md p-4 focus:ring-2 focus:ring-blue-600"
-                    value={formData.eventEndTime}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
-
-                <div className="flex flex-col">
-                  <label
-                    htmlFor="event-venue"
+                    htmlFor="venue_id"
                     className="mb-2 text-lg font-semibold text-blue-800"
                   >
                     Event Venue
                   </label>
                   <input
                     type="text"
-                    id="eventVenue"
+                    id="venue_id"
                     placeholder="Enter event venue"
                     className="border border-gray-300 rounded-md p-4 focus:ring-2 focus:ring-blue-600"
-                    value={formData.eventVenue}
+                    value={formData.venue_id}
                     onChange={handleInputChange}
                     required
                   />
@@ -239,132 +223,67 @@ export default function CreateEventPage() {
 
                 <div className="flex flex-col">
                   <label
-                    htmlFor="event-type"
+                    htmlFor="description"
                     className="mb-2 text-lg font-semibold text-blue-800"
                   >
-                    Event Type
+                    Event Description
                   </label>
-                  <select
-                    id="eventType"
+                  <textarea
+                    id="description"
+                    placeholder="Enter event description"
                     className="border border-gray-300 rounded-md p-4 focus:ring-2 focus:ring-blue-600"
-                    value={formData.eventType}
+                    value={formData.description}
                     onChange={handleInputChange}
                     required
+                  />
+                </div>
+
+                <div className="flex flex-col">
+                  <label
+                    htmlFor="inventory_id"
+                    className="mb-2 text-lg font-semibold text-blue-800"
                   >
-                    <option value="Workshop">Workshop</option>
-                    <option value="Seminar">Seminar</option>
-                    <option value="Competition">Competition</option>
-                    <option value="Webinar">Webinar</option>
-                    <option value="Other">Other</option>
-                  </select>
+                    Inventory ID
+                  </label>
+                  <input
+                    type="text"
+                    id="inventory_id"
+                    placeholder="Enter inventory ID"
+                    className="border border-gray-300 rounded-md p-4 focus:ring-2 focus:ring-blue-600"
+                    value={formData.inventory_id}
+                    onChange={handleInputChange}
+                  />
+                </div>
+
+                <div className="flex flex-col">
+                  <label
+                    htmlFor="additional_details"
+                    className="mb-2 text-lg font-semibold text-blue-800"
+                  >
+                    Additional Details
+                  </label>
+                  <textarea
+                    id="additional_details"
+                    placeholder="Enter any additional details"
+                    className="border border-gray-300 rounded-md p-4 focus:ring-2 focus:ring-blue-600"
+                    value={formData.additional_details}
+                    onChange={handleInputChange}
+                  />
                 </div>
               </div>
 
-              <div className="flex flex-col">
-                <label
-                  htmlFor="participants-number"
-                  className="mb-2 text-lg font-semibold text-blue-800"
-                >
-                  Number of Participants
-                </label>
-                <input
-                  type="number"
-                  id="participantsNumber"
-                  placeholder="Enter number of participants"
-                  className="border border-gray-300 rounded-md p-4 focus:ring-2 focus:ring-blue-600"
-                  value={formData.participantsNumber}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-
-              <div className="flex flex-col">
-                <label
-                  htmlFor="coordinator-name"
-                  className="mb-2 text-lg font-semibold text-blue-800"
-                >
-                  Coordinator Name
-                </label>
-                <input
-                  type="text"
-                  id="coordinatorName"
-                  placeholder="Enter coordinator's name"
-                  className="border border-gray-300 rounded-md p-4 focus:ring-2 focus:ring-blue-600"
-                  value={formData.coordinatorName}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-
-              <div className="flex flex-col">
-                <label
-                  htmlFor="coordinator-contact"
-                  className="mb-2 text-lg font-semibold text-blue-800"
-                >
-                  Coordinator Contact
-                </label>
-                <input
-                  type="tel"
-                  id="coordinatorContact"
-                  placeholder="Enter coordinator's contact number"
-                  className="border border-gray-300 rounded-md p-4 focus:ring-2 focus:ring-blue-600"
-                  value={formData.coordinatorContact}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-
-              <div className="flex flex-col">
-                <label
-                  htmlFor="registration-link"
-                  className="mb-2 text-lg font-semibold text-blue-800"
-                >
-                  Registration Link
-                </label>
-                <input
-                  type="url"
-                  id="registrationLink"
-                  placeholder="Enter registration link"
-                  className="border border-gray-300 rounded-md p-4 focus:ring-2 focus:ring-blue-600"
-                  value={formData.registrationLink}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-
-              <div className="flex flex-col">
-                <label
-                  htmlFor="event-banner"
-                  className="mb-2 text-lg font-semibold text-blue-800"
-                >
-                  Event Banner
-                </label>
-                <input
-                  type="file"
-                  id="event-banner"
-                  className="border border-gray-300 rounded-md p-4 focus:ring-2 focus:ring-blue-600"
-                  onChange={handleInputChange}
-                  accept="image/*"
-                  required
-                />
-              </div>
-
               {loading ? (
-                <p className="text-center text-blue-600 font-semibold">
-                  Submitting event...
-                </p>
+                <p>Loading...</p>
               ) : (
                 <button
                   type="submit"
-                  className="w-full bg-blue-600 text-white py-4 rounded-md font-bold hover:bg-blue-700 transition-all duration-300"
+                  className="bg-blue-600 text-white font-bold px-8 py-4 rounded-lg hover:bg-blue-700 transition-all duration-300"
                 >
-                  Create Event
+                  Submit
                 </button>
               )}
 
-              {error && (
-                <p className="text-red-600 text-center mt-4">{error}</p>
-              )}
+              {error && <p className="text-red-600">{error}</p>}
             </form>
           </div>
         </section>
